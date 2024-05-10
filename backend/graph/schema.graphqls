@@ -1,0 +1,22 @@
+# @/graph/typeDefs/todo.gql
+type Todo {
+   ID: ID!
+  text: String!
+  done: Boolean!
+}
+
+input TodoInput {
+  text: String!
+  done: Boolean!
+}
+
+type Mutation {
+  createTodo(text: String!, done:Boolean!, ID: ID!): Todo!
+  updateTodo(ID: ID!, input: TodoInput!): Todo!
+  deleteTodo(todoId: ID!): Todo!
+}
+
+type Query {
+  getTodos: [Todo!]!
+  getTodo(todoId: ID!): Todo!
+}
