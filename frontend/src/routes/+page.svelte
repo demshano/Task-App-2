@@ -10,7 +10,7 @@ const client = new Client({
 
 setContextClient(client);
 </script>
-
+<p class="text-4xl font-bold flex justify-center mt-4 mb-8">TaskTracker Plus</p>
 <CreateTodoForm />
-<p>display todos</p>
+
 <DisplayToDos />

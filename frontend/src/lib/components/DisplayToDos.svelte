@@ -63,14 +63,14 @@ const toggleUpdateTask = (taskId) => {
   <p class="text-red-500">Error: {$todosStore.error.message}</p>
 {:else}
   <!-- Display individual todo items -->
-  <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-4">
     {#each todosData.getTodos as todo}
       <div>
         <li class="bg-white rounded-lg shadow-md overflow-hidden {taskToUpdate === todo.ID ? 'col-span-1' : 'col-span-2 md:col-span-1 lg:col-span-1'}">
           <div class="p-4 space-y-2">
-            <p class="text-lg font-semibold">ID: {todo.ID}</p>
-            <p class="text-gray-600">Text: {todo.text}</p>
-            <p class="text-gray-600">Done: {todo.done ? 'Yes' : 'No'}</p>
+            <p class="text-lg font-semibold text-gray-400">ID: {todo.ID}</p>
+            <p class="text-gray-600 text-2xl font-semibold {todo.done ? 'text-green-600' : 'text-gray-600'}">Text: {todo.text}</p>
+            <p class="text-gray-500 text-2xl font-semibold {todo.done ? 'text-green-600' : 'text-gray-600'}">Done: {todo.done ? 'Yes' : 'No'}</p>
           </div>
 
           <!-- Button to open/close the UpdateTask component for the specific task -->
