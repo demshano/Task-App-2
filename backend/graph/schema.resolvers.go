@@ -51,10 +51,12 @@ func (r *mutationResolver) UpdateTodo(ctx context.Context, id string, input mode
 }
 
 // DeleteTodo is the resolver for the deleteTodo field.
-func (r *mutationResolver) DeleteTodo(ctx context.Context, todoID string) (*model.Todo, error) {
-	context := common.GetContext(ctx)
+func (r *mutationResolver) DeleteTodo(ctx context.Context, id string) (*model.Todo, error) {
+	//context := common.GetContext(ctx)
 	var todo *model.Todo
-	err := context.Database.Where("id = ?", todoID).Delete(&todo).Error
+
+    
+	err := db.Where("id = ?", id).Delete(&todo).Error
 	if err != nil {
 		return nil, err
 	}

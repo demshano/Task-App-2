@@ -49,7 +49,7 @@ type DirectiveRoot struct {
 type ComplexityRoot struct {
 	Mutation struct {
 		CreateTodo func(childComplexity int, text string, done bool, id string) int
-		DeleteTodo func(childComplexity int, todoID string) int
+		DeleteTodo func(childComplexity int, id string) int
 		UpdateTodo func(childComplexity int, id string, input model.TodoInput) int
 	}
 
@@ -68,7 +68,7 @@ type ComplexityRoot struct {
 type MutationResolver interface {
 	CreateTodo(ctx context.Context, text string, done bool, id string) (*model.Todo, error)
 	UpdateTodo(ctx context.Context, id string, input model.TodoInput) (*model.Todo, error)
-	DeleteTodo(ctx context.Context, todoID string) (*model.Todo, error)
+	DeleteTodo(ctx context.Context, id string) (*model.Todo, error)
 }
 type QueryResolver interface {
 	GetTodos(ctx context.Context) ([]*model.Todo, error)
@@ -116,7 +116,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.DeleteTodo(childComplexity, args["todoId"].(string)), true
+		return e.complexity.Mutation.DeleteTodo(childComplexity, args["ID"].(string)), true
 
 	case "Mutation.updateTodo":
 		if e.complexity.Mutation.UpdateTodo == nil {
@@ -332,14 +332,14 @@ func (ec *executionContext) field_Mutation_deleteTodo_args(ctx context.Context, 
 	var err error
 	args := map[string]interface{}{}
 	var arg0 string
-	if tmp, ok := rawArgs["todoId"]; ok {
-		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("todoId"))
+	if tmp, ok := rawArgs["ID"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("ID"))
 		arg0, err = ec.unmarshalNID2string(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["todoId"] = arg0
+	args["ID"] = arg0
 	return args, nil
 }
 
@@ -575,7 +575,7 @@ func (ec *executionContext) _Mutation_deleteTodo(ctx context.Context, field grap
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().DeleteTodo(rctx, fc.Args["todoId"].(string))
+		return ec.resolvers.Mutation().DeleteTodo(rctx, fc.Args["ID"].(string))
 	})
 	if err != nil {
 		ec.Error(ctx, err)

@@ -11,7 +11,7 @@
 
   function generateRandomId(length = 8) {
     const characters =
-      "465735438835834583854865";
+      "465735438835834583854865frfueryguqrfyg";
     let result = "";
     for (let i = 0; i < length; i++) {
       result += characters.charAt(
@@ -20,10 +20,10 @@
     }
     return result;
   }
-  let ID = generateRandomId();
-  // let id;
-
+  
+  
   const createTodo = async () => {
+    let ID = generateRandomId();
     result = await mutationStore({
       client,
       query: gql`
@@ -39,21 +39,25 @@
     });
   };
 
-  console.log(createTodo);
+  // console.log(createTodo);
 </script>
 
-<form on:submit|preventDefault={createTodo}>
+<!-- <form on:submit|preventDefault={createTodo}>
   <input type="text" bind:value={text} />
 
-  <button type="submit">Add Todo</button>
+  <button type="submit" >Add Todo</button>
+</form> -->
+
+<form class="flex flex-col items-center" on:submit|preventDefault={createTodo}>
+  <input type="text" class="w-64 px-4 py-2 mb-4 border rounded-md" placeholder="Enter your todo" bind:value={text} />
+
+  <button type="submit" class="px-6 py-3 text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors duration-300 ease-in-out">
+    Add Todo
+  </button>
 </form>
 
-<button></button>
 
-<!-- {#if result.fetching}
-  <p>Creating todo...</p>
-{:else if result.error}
-  <p>Error creating todo: {result.error.message}</p>
-{:else if result.data}
-  <p>Todo created successfully!</p>
-{/if} -->
+
+
+
+

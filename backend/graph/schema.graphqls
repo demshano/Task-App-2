@@ -13,7 +13,7 @@ input TodoInput {
 type Mutation {
   createTodo(text: String!, done:Boolean!, ID: ID!): Todo!
   updateTodo(ID: ID!, input: TodoInput!): Todo!
-  deleteTodo(todoId: ID!): Todo!
+  deleteTodo(ID: ID!): Todo!
 }
 
 type Query {
