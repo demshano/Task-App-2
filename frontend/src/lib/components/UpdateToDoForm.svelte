@@ -80,7 +80,7 @@ const toggleUpdateTask = () => {
           <input type="checkbox" bind:checked={done} class="form-checkbox h-5 w-5 text-blue-600" />
           <span class="ml-2 text-gray-700">Done</span>
         </label>
-        <button on:click={updateTask} class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 transition duration-300 ease-in-out hover:bg-blue-600">
+        <button on:click={updateTask} class="bg-blue-500 ml-2 text-white px-4 py-2 rounded-md mt-4 transition duration-300 ease-in-out hover:bg-blue-600">
           Update
         </button>
       </div>
