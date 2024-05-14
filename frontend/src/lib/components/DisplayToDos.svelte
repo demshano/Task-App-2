@@ -9,7 +9,7 @@
 
 
 
-console.log("display todo: "+showUpdateButton)
+// console.log("display todo: "+showUpdateButton)
 
   
 
@@ -35,13 +35,16 @@ console.log("display todo: "+showUpdateButton)
 
  // State variable to store the ID of the task to update
  let taskToUpdate = null;
+ let showTask = false;
 
 // Function to toggle the visibility of the UpdateTask component for a specific task
 const toggleUpdateTask = (taskId) => {
+  showTask = true;
+  console.log('show',showTask)
   taskToUpdate = taskToUpdate === taskId ? null : taskId;
   // showUpdateButton.update(true)
-  showUpdateButton.update(false)
-  console.log("display: "+showUpdateButton)
+  // showUpdateButton.update(false)
+  // console.log("display: "+showUpdateButton)
 };
 
 // console.log("display: "+showBtnValue)
@@ -49,12 +52,12 @@ const toggleUpdateTask = (taskId) => {
 </script>
 
 <style>
-  .hidden {
+  /* .hidden {
     display: none;
   }
   .block {
     display: block;
-  }
+  } */
 </style>
 
 {#if $todosStore.fetching}
@@ -73,14 +76,16 @@ const toggleUpdateTask = (taskId) => {
             <p class="text-gray-500 text-2xl font-semibold {todo.done ? 'text-green-600' : 'text-gray-600'}">Done: {todo.done ? 'Yes' : 'No'}</p>
           </div>
 
-          <!-- Button to open/close the UpdateTask component for the specific task -->
+         
+
+          <!-- Show the UpdateTask component for the specific task -->
+          {#if taskToUpdate === todo.ID && showTask == true}
+            <UpdateToDoForm ID={todo.ID} text={todo.text} done={todo.done} bind:showTask/>
+          {:else}
+             <!-- Button to open/close the UpdateTask component for the specific task -->
           <button on:click={() => {toggleUpdateTask(todo.ID); }} class="bg-blue-500 text-white px-4 py-2 rounded-b-md transition duration-300 ease-in-out hover:bg-blue-600 w-full">
             Update
           </button>
-
-          <!-- Show the UpdateTask component for the specific task -->
-          {#if taskToUpdate === todo.ID}
-            <UpdateToDoForm ID={todo.ID} text={todo.text} done={todo.done} />
           {/if}
 
           <DeleteToDoTask ID={todo.ID} />

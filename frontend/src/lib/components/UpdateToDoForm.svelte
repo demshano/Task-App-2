@@ -21,6 +21,7 @@
     export let text;
     export let done;
     export let ID;
+    export let showTask;
   
     let result;
     let client = getContextClient();
@@ -50,7 +51,8 @@ const toggleUpdateTask = () => {
       });
 
            // State variable to control the visibility of the UpdateTask component
-      toggleUpdateTask();
+      // toggleUpdateTask();
+      showTask = false;
       showUpdateButton = true;
     
     };
@@ -74,7 +76,7 @@ const toggleUpdateTask = () => {
     </div>
      -->
 
-     <div class="{showUpdateTask ? 'block' : 'hidden'} bg-white rounded-lg shadow-md p-4">
+     <div class=" bg-white rounded-lg shadow-md p-4">
         <input type="text" bind:value={text} class="border-gray-300 border rounded-md px-3 py-2 mb-3 w-full" />
         <label class="inline-flex items-center">
           <input type="checkbox" bind:checked={done} class="form-checkbox h-5 w-5 text-blue-600" />
